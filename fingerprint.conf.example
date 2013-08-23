@@ -15,19 +15,19 @@ server.socket_port = 8080
 server.thread_pool = 30
 
 work.file.dir = 'file_data'
-wkhtmltopdf.bin = '\wkhtmltopdf\wkhtmltopdf.exe'
-app.root = 'c:\\dev\\fingerprint\\'
+wkhtmltopdf.bin = '/wkhtmltopdf/wkhtmltopdf.exe'
+app.root = '/path/to/fingerprint/'
 
 log.screen = True
 # log.access_file : '/path/to/access.log'
 # log.error_file : '/path/to/error.log'
 
-error_page.404 = "c:/dev/fingerprint/template/404.html" 
-error_page.500 = "c:/dev/fingerprint/template/500.html" 
+error_page.404 = "/path/to/fingerprint/template/404.html" 
+error_page.500 = "/path/to/fingerprint/template/500.html" 
 
 [/]
-tools.staticdir.root = 'c:/dev/fingerprint/'
-tools.staticfile.root = 'c:/dev/fingerprint/'
+tools.staticdir.root = '/path/to/fingerprint/'
+tools.staticfile.root = '/path/to/fingerprint/'
 
 tools.force_https.on = True
 
