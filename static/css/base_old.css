@@ -1,0 +1,50 @@
+/*
+ * Building Fingerprint Tool 
+ *
+ * base.css
+ * ~~~~~~~~~~~
+ * hmmm....
+ */
+
+/*@import url(http://fonts.googleapis.com/css?family=Crimson+Text);*/
+
+ 
+/* -- page layout ----------------------------------------------------------- */
+ 
+body {
+    font-family: Georgia, serif;
+    font-size: 17px;
+    background-color: white;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+div.document {
+    width: 940px;
+    margin: 30px auto 0 auto;
+}
+
+div.documentwrapper {
+    float: left;
+    width: 100%;
+}
+
+div.bodywrapper {
+    margin: 0 0 0 220px;
+}
+
+div.sphinxsidebar {
+    width: 220px;
+}
+
+hr {
+    border: 1px solid #B1B4B6;
+}
+ 
+div.body {
+    background-color: #ffffff;
+    color: #3E4349;
+    padding: 0 30px 0 30px;
+}
+

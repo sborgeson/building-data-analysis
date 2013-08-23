@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    {% block head %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  <title>Building fingerprinting tool{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css"        />
+    <link rel="stylesheet" type="text/css" href="/static/css/fingerprint.css" />
+    {% endblock %}
+  </head>
+  <body>
+    {% block header %}
+    <div class='header'>Building Energy Fingerprint
+      <div style='color:#008000;font-style:italic;font-size:25px;'>Green Button data analysis</div>
+    </div>
+    <span class='header_right'><img width='132' src='/static/DOE_logo.png' />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img width='144' src='/static/LBNL_logo.png' /></span>
+    <div style='clear:both;'></div>
+    <div class="hr">&nbsp;</div>
+    {% endblock %}
+    {% block content %}
+    This is the default content from the base template. You probably want to override it.
+    {% endblock %}
+    {% block footer %}
+    <div class="hr">&nbsp;</div>
+    <div class='footer'><a href='/'>Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href='/upload'>Upload</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href='/about'>About</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href='/gbdata'>Getting Green Button Data</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href='/developers'>Developers</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href='http://www.lbl.gov/Disclaimers.html'>Privacy & Disclaimer</a>&nbsp;&nbsp;|&nbsp;&nbsp;Copyright 2013 LBNL</div>
+    <div class='margin-top:10px'>&nbsp;</div>
+    {% endblock %}
+  </body>
+</html>

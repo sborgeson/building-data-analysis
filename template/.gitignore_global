@@ -1,0 +1,13 @@
+
+
+
+# OS generated files #
+######################
+._*
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# edit plus backup files
+*.bak

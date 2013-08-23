@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}: Developers{% endblock %}
+{% block head %}{{ super() }}{% endblock %} {# note that the head looks for the title variable. #}
+{% block content %}    
+    <div class='content'>
+      <h1>Open source algorithms</h1>
+      <div class='space_20'></div>
+      This tool was developed at Lawrence Berkieley National Lab using a Python backend and web standard HTML, CSS, and JavaScript. The backend relies on the CherryPy server framework, the Jinja2 templating system, wkhtmltopdf - a WebKit rendered to convert HTML to PDF, and the scipy, numpy, and matplotlib Python modules for data manipulation and dynamic generation of figures. The source code will be available for examination or third party use upon completion of a legal review, documentation, and code cleanup effort. For early access, please contact sborgeson &lt;at&gt; berkeley &lt;dot&gt; edu.
+    </div>
+{% endblock content %}
+

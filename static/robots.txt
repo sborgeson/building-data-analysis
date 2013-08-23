@@ -1,0 +1,5 @@
+# robots.txt for Building Fingerprints Tool site
+
+# no spidering for now
+User-agent: *
+Disallow: /

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}: Explore your data{% endblock %}
+{% block head %}{{ super() }}{% endblock %} {# note that the head looks for the title variable. #}
+{% block content %}    
+<div class='summary'>
+  <div>File details:</div>
+  <span style='font-weight:bold;'>Name:</span> {{building.attr.bldg_name}}</br>
+  <span style='font-weight:bold;'>Building type:</span> {{building.attr.bldg_type}}<br/>
+  <span style='font-weight:bold;'>Zip code:</span> {{building.attr.bldg_zip}}<br/>
+  <span style='font-weight:bold;'>Weather station:</span> {{building.attr.bestWBAN[9]}} ({{ "%0.1f"|format(building.attr.bestWBAN[1])}} km away)<br/>
+  <span style='font-weight:bold;'>Floor area:</span> {{building.attr.bldg_size}} sqft<br/>
+  <span style='font-weight:bold;'>Occupant count:</span> {{building.attr.occ_count}}<br/>
+  <span style='font-weight:bold;'>Year built:</span> {{building.attr.bldg_vintage}}<br/>
+  <span style='font-weight:bold;'>Heating/cooling:</span> {{building.attr.hvac_type}}<br/>
+  <span style='font-weight:bold;'>File:</span> {{filename}}<br/>
+  <span style='font-weight:bold;'>Size:</span> {{filesize}} bites<br/>
+  <span style='font-weight:bold;'>Content type:</span> {{filetype}}<br/>
+
+</div>
+<div class='hr'>&nbsp;</div>
+<div class='content'>
+  <div class='space_20'></div>
+  <h1>Success!</h1>
+  <div>The upload and validation of your data was successful. View a <a href='/dynamic/custom_report.pdf' target='pdf_view'>customized report</a> based on your data in pdf format.
+  </div>
+  <div class='space_20'>
+  <a class="button orange" href='/dynamic/custom_report.pdf' target='pdf_view'>Get your report</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button gray" href='/dynamic/csv_data.csv?download=True'>Download to Excel</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button gray" href='/feedback'>Provide feedback on this tool</a>
+  </div>
+  <div style='margin-top:150px;'>
+  {# Debug views: <a href='/dynamic/custom_report.html'>html report</a>, <a href='/dynamic/heatmap.png'>heatmap</a>,<a href='/dynamic/plot.png'>time series plot</a>,<a href='/dynamic/load_duration.png'>load duration</a>,<a href='/dynamic/histogram.png'>kW histogram</a>,<a href='/dynamic/weekly_mean.png'>week summary</a>,<a href='/dynamic/tout_vs_kwh.png'>Tout vs. kWh</a> #}
+  </div>
+</div>
+{% endblock content %}

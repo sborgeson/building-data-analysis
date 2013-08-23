@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}: About{% endblock %}
+{% block head %}{{ super() }}{% endblock %} {# note that the head looks for the title variable. #}
+{% block content %}    
+    <div class='content'>
+      <h1>About this tool</h1>
+      <div class='space_20'></div>
+      This tool was developed at Lawrence Berkieley National Lab with funding from the US Department of Energy to provide an open, documented, and easy to use tool for the analysis of of Smart Meter data. It is intended to improve building owner and occupant access to sound analytical methods and to foster better decision making about energy efficiency interventions. It is not intended as a substitute for more detailed professional assessments.
+    </div>
+{% endblock content %}
+

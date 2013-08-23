@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}: Green Button Data{% endblock %}
+{% block head %}{{ super() }}{% endblock %} {# note that the head looks for the title variable. #}
+{% block content %}    
+    <div class='content'>
+      <h1>What is Green Button data?</h1>
+      <div class='space_20'></div>
+      Green Button is the name of a data format designed specifically for sharing Smart Meter data. It iwas developed and is updated by an <a href='http://www.greenbuttondata.org/'>industry led group</a>. If your utility has installed a smart meter for your home or a commercial building you control, there is a good chance that they either have or are working on providing you with access to downloading the history of your electricity usage in Green Button format. To check for the availability of this data, look for and click on the Green Button icon after you log into your account on your utility's website. It will look like this:
+      <div class='space_20'></div>
+      <img src='/static/gbicon.png'>
+      <h1>How do I download it?</h1>
+      Because every utility is free to handle the process differently, it is not possible to give generic instructions for determining whether your utility provides data in the Green Button format or where on their website you can find it. The basic requirement is that you know how to log onto your account on your utility's website. A link to your Green Button data will likely be available from a section of your account called something like "My Usage". Once you locate the page for downloading your data, there are a few additional requirements you should try to meet for this tool to be able to analyze your data:
+      <div style='margin-top:10px;font-size:14px;'>
+        <ul>
+        <li>Do not download the data in a CSV format</li>
+        <li>Make sure you are downloading XML or Green Button format data</li>
+        <li>Do not choose to download "bill totals" or "monthly totals" you want hourly or 15 minute interval data across a range of days</li>
+        <li>The Green Button option you want may be labeled as "for developers" or "for third parties" or "for sharing"</li>
+        <li>If you are given an option of choosing a range of days, choose the longest possible range</li>
+        <li>Save the resulting file to your disk - it should have an .xml or .zip extension. If it is less than 20 KB, it is likely in the wrong format.</li>
+        </ul>
+      </div>
+      <div class='space_20'></div>
+      For more on Green Button data, see:
+      <div style='margin-top:10px;font-size:14px;'>
+        <ul>
+        <li>DOE's <a href='http://energy.gov/data/green-button'>Green Button page</a>.</li>
+        <li>A <a href='http://www.greenbuttondata.org/greenadopt.html'>list of utilities</a> that already provide Green Button data.</li>
+        <li>PGE's Northern California <a href='http://www.pge.com/myhome/myaccount/using/thegreenbutton/'>Green Button information</a>.</li>
+        <li>SDGE's San Diego <a href='http://www.sdge.com/green-button'>Green Button information</a>.</li>
+        </ul>
+      </div>
+    </div>
+{% endblock content %}
+

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}: Upload your data{% endblock %}
+{% block head %}{{ super() }}{% endblock %} {# note that the head looks for the title variable. #}
+{% block content %}
+<div class='content'>
+  <h1>Upload your data</h1>
+  <div style='width:90%'>Please start by downloading your building's <a href='/gbdata'>Green Button data</a> from your utility. Then upload that data and share some simple building characteristics. The details you provide will be used to improve the quality of the analysis performed by this tool. The information you provide will be used only in support of improving your building energy analysis and will not be shared for any reason.</div>
+  <div class='space_20'></div>
+  <form id="data_upload" action="/upload/doUpload" method="post" enctype="multipart/form-data">
+    <!-- form contents -->
+    <div>
+      {% if errs|length > 0 %}
+      <div class='error'>
+        <ul>
+        {% for key in errs %}
+            <li>{{ errs[key] }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    </div>
+    <div class='space_20'></div>
+	Red asterix (<span class='error'>*</span>) indicates a field required for proper analysis, but you can enter "?" for most fields if you don't know.
+    <div class='space_20'></div>
+
+    <div {% if errs['upFile'] is defined %}class='error'{% endif %}>
+    Please select a Green Button data (XML or zip) file from your hard drive:
+    <a href="#" class="toolp">
+      <img src="/static/huh.png" />
+      <span>
+        <img class="callout" src="/static/callout.gif" alt="Tip"><strong>Green Button data</strong><br>Utilities often provide access to data from smart meters in a standardized format called "Green Button XML". To use this tool, you must first obtain Green Button data for a building you are familiar with, like your home or workplace.</span>
+    </a>
+    </div>
+    <input type="file" name="upFile" tabindex='1' size="40" style="background:#eee;"><span class='error'>  *</span>
+
+    <div class='space_20'></div>
+
+    <div {% if errs['bldg_name'] is defined %}class='error'{% endif %}>Name your building:
+    <a href="#" class="toolp">
+      <img src="/static/huh.png" />
+      <span>
+        <img class="callout" src="/static/callout.gif" alt="Tip"><strong>Building name</strong><br>This name will appear for your convienience in your final report and will be used for your reference on intermediate screens. Example: Joe's house</span>
+    </a>
+    </div> 
+    <input type="text" name="bldg_name" tabindex='2' size="50" {% if params is defined %}value='{{ params['bldg_name'] }}'{% endif %} /><span class='error'>  * </span>
+    
+    <div {% if errs['bldg_zip'] is defined %}class='error'{% endif %}>Zip code:
+    <a href="#" class="toolp">
+      <img src="/static/huh.png" />
+      <span>
+        <img class="callout" src="/static/callout.gif" alt="Tip"><strong>Building zip code</strong><br>Enter the five digit zip code for the building so that weather data corresponding to your building's location can be used for analysis. Format: 5 digits only</span>
+    </a>
+    </div>
+    <input type="text" name="bldg_zip" tabindex='3' size="5" {% if params is defined %}value='{{ params['bldg_zip'] }}'{% endif %} /><span class='error'>  * </span>
+    
+    
+    <div {% if errs['bldg_vintage'] is defined %}class='error'{% endif %}>Year the building was built:
+    <a href="#" class="toolp">
+      <img src="/static/huh.png" />
+      <span>
+        <img class="callout" src="/static/callout.gif" alt="Tip"><strong>Year built</strong><br>Enter the four digit year the building was completed so this vintage can be used for comparison to other buildings. If a major renovation was made, enter that year. Approximations are fine. Format: 4 digits only. Enter '?' if you do not know.</span>
+    </a>
+    </div>
+    <input type="text" name="bldg_vintage" tabindex='4' size="5" {% if params is defined %}value='{{ params['bldg_vintage'] }}'{% endif %} /><span class='error'>  * </span>
+    
+    <div {% if errs['bldg_size'] is defined %}class='error'{% endif %}>Floor area of the building in square feet:
+    <a href="#" class="toolp">
+      <img src="/static/huh.png" />
+      <span>
+        <img class="callout" src="/static/callout.gif" alt="Tip"><strong>Floor space</strong><br>Enter the square footage of the building so energy intensity can be calculated per-sqft. This area should correspond to the area that would be given for a real estate listing. Approximations are fine. The average stand alone home is 2400 sqft. Format: digits only. Enter '?' if you do not know.</span>
+    </a>
+    </div>
+    <input type="text" name="bldg_size" tabindex='5' size="30" {% if params is defined %}value='{{ params['bldg_size'] }}'{% endif %}><span class='error'>* </span>
+    
+    <div {% if errs['bldg_type'] is defined %}class='error'{% endif %}>Type that best categorizes the building:
+    <a href="#" class="toolp">
+      <img src="/static/huh.png" />
+      <span>
+        <img class="callout" src="/static/callout.gif" alt="Tip"><strong>Building type</strong><br>Enter the building type <b>served by the meter</b> so that comparisons can be made to similar buildings. There are big differences across building types, so it can be useful to narrow down to a group of similar buildings.</span>
+    </a>
+    </div>
+    <select name="bldg_type" tabindex='6'>
+    <option value=''>Select one</option>
+    {% for option in formOptions['bldg_type'] %}
+    <option value='{{ option }}'{% if params is defined %}{% if params['bldg_type'] == option %} selected='True'{% endif %}{% endif %}>{{ option }}</option>
+    {% endfor %}
+    </select><span class='error'>  * </span>
+    
+    <div {% if errs['hvac_type'] is defined %}class='error'{% endif %}>How is the building heated and cooled:
+    <a href="#" class="toolp">
+      <img src="/static/huh.png" />
+      <span>
+        <img class="callout" src="/static/callout.gif" alt="Tip"><strong>HVAC type</strong><br>Choose the option that best corresponds to the fuels use for heating and cooling the building so this tool knows whether to look for weather effects on electric loads.</span>
+    </a>
+    </div>
+    <select name="hvac_type" tabindex='7'>
+    <option value=''>Select one</option>
+    {% for option in formOptions['hvac_type'] %}
+    <option value='{{ option }}'{% if params is defined %}{% if params['hvac_type'] == option %} selected='True'{% endif %}{% endif %}>{{ option }}</option>
+    {% endfor %}
+    </select><span class='error'>  * </span>
+
+    <div {% if errs['occ_count'] is defined %}class='error'{% endif %}>Number people who use the building regularly:
+    <a href="#" class="toolp">
+      <img src="/static/huh.png" />
+      <span>
+        <img class="callout" src="/static/callout.gif" alt="Tip"><strong>Number of occupants</strong><br>The number of occupants will be used to calculate energy use per-occupant. This aids in comparisons between buildings. For a home, use family size. For a commercial space, use the number of regular workers or the typical number of people using the building. Format: digits only. Enter '?' if you do not know.</span>
+    </a>
+    </div>
+    <input type="text" name="occ_count" tabindex='8' size="5" {% if params is defined %}value='{{ params['occ_count'] }}'{% endif %} /><span class='error'>  * </span>
+        
+    <div class='space_20'><input class='button orange' tabindex='9' type="submit" value="Upload data"></div>
+  </form>
+</div>
+{% endblock content %}

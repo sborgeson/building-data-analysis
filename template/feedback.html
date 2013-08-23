@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}: Feedback{% endblock %}
+{% block head %}{{ super() }}{% endblock %} {# note that the head looks for the title variable. #}
+{% block content %}
+<div class='content'>
+  <h1>Give us your feedback.</h1>
+  <div style='width:90%'>Thoughts on the process? Insights from using this tool? Feature ideas? Found an error? Tell us what's on your mind.</div>
+  <div class='space_20'></div>
+  <form id="feedback" action="/feedback/doFeedback" method="post" enctype="multipart/form-data">
+    <!-- form contents -->
+    <div>Provide your feedback on thos tool:
+    <a href="#" class="toolp">
+      <img src="/static/huh.png" />
+      <span>
+        <img class="callout" src="/static/callout.gif" alt="Tip"><strong>Feedback</strong><br>Please provide thoughts you have based on using this tool. Let us know how it worked for you, if you encountered a specific problem, or have ideas for improving it.</span>
+    </a>
+    </div> 
+    <div class='space_20'></div>
+
+    <textarea cols="10" rows="8" name="feedback" style='width:600px;' onfocus="if(!this.started){ this.value='';this.started=1;}">Enter your thoughts here.</textarea>
+   
+    <div class='space_20'><input class='button orange' type="submit" value="Submit feedback"></div>
+  </form>
+</div>
+{% endblock content %}

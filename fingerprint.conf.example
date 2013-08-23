@@ -1,0 +1,61 @@
+[global]
+server.socket_host = "127.0.0.1"
+server.socket_port = 8080
+
+# Uncomment the following lines to run on HTTPS at the same time
+#server.2.socket_host: "127.0.0.1"
+#server.2.socket_port: 8433
+#server.2.ssl_certificate: './cert/test.pem'
+#server.2.ssl_private_key: './cert/test.pem'
+#'server.2.ssl_module':'pyopenssl',
+#'server.2.ssl_certificate':'/home/ubuntu/my_cert.crt',
+#'server.2.ssl_private_key':'/home/ubuntu/my_cert.key',
+#'server.2.ssl_certificate_chain':'/home/ubuntu/gd_bundle.crt'
+#server.2.thread_pool = 30
+server.thread_pool = 30
+
+work.file.dir = 'file_data'
+wkhtmltopdf.bin = '\wkhtmltopdf\wkhtmltopdf.exe'
+app.root = 'c:\\dev\\fingerprint\\'
+
+log.screen = True
+# log.access_file : '/path/to/access.log'
+# log.error_file : '/path/to/error.log'
+
+error_page.404 = "c:/dev/fingerprint/template/404.html" 
+error_page.500 = "c:/dev/fingerprint/template/500.html" 
+
+[/]
+tools.staticdir.root = 'c:/dev/fingerprint/'
+tools.staticfile.root = 'c:/dev/fingerprint/'
+
+tools.force_https.on = True
+
+tools.sessions.on = True
+tools.sessions.storage_type = "ram"
+#tools.sessions.storage_path = "sessions"
+tools.sessions.timeout = 60
+
+# auto convert from unicode to UTF-8 or other suitable format
+tools.encode.on = True
+# gzip content when possible
+tools.gzip.on = True
+
+[/static]
+tools.staticdir.on: True
+tools.staticdir.dir: 'static'
+
+[/upload]
+#tools.jinja.on = True
+#request.dispatch: cherrypy.dispatch.MethodDispatcher()
+#request.config.template = 'upload.html'
+
+[/img]
+
+[/favicon.ico]
+tools.staticfile.on = True
+tools.staticfile.filename = "static/favicon.ico"
+
+[/robots.txt]
+tools.staticfile.on = True
+tools.staticfile.filename = "static/robots.txt"

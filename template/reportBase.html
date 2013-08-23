@@ -1,0 +1,302 @@
+{% set webRoot = '../../' %}
+
+{# todo:
+
+min
+max/min
+balance point
+tout slope
+
+P1: 
+Typical load shape with interpretation
+Balance point, seasonal energy, total cooling days
+
+Foreach metric:
+  Metric, value, and text interpretation
+
+What can I do?
+Should I get an energy audit?
+What can I do myself?
+#}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    {% block head %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  <title>Building fingerprinting report ({{sessionId}})</title>
+    <link rel="stylesheet" type="text/css" href="{{webRoot}}static/css/base.css"        />
+    <link rel="stylesheet" type="text/css" href="{{webRoot}}static/css/fingerprint.css" />
+    <script type="text/javascript">
+    function drawLine(canvasId,x1,y1,x2,y2){
+      // get the canvas element using the DOM
+      var canvas = document.getElementById(canvasId);
+      // Make sure we don't execute when canvas isn't supported
+      if (canvas.getContext){
+        // use getContext to use the canvas for drawing
+        var ctx = canvas.getContext('2d');
+        // Draw line
+        ctx.beginPath();
+        ctx.moveTo(x1,y1);
+        ctx.lineTo(x2,y2);
+        ctx.stroke();
+      } else {
+        alert('You need Safari or Firefox 1.5+ to use canvas commands');
+      }
+    }
+    </script>
+    {% endblock %}
+  </head>
+  
+  <body>
+    {% block page_header %}
+    <div style='color:#008000;float:left;font-weight:bold;font-size:35px;line-height:110%;'>Building Energy Fingerprint<br>
+    <span style='color:#008000;float:left;font-style:italic;font-size:25px;line-height:110%;'>Green Button data analysis</span></div>
+    <span style='float:right;'><img width='99' src='{{webRoot}}static/DOE_logo.png' />&nbsp;&nbsp;&nbsp;<img width='108' src='{{webRoot}}static/LBNL_logo.png' /></span>
+    <div style='clear:both;'></div>
+    <div class='hr_rpt'">&nbsp;</div>
+    {% endblock %}
+
+    {# this section defines defaults for variables that come in from form submission #}
+    {% set bldg_name=building.attr.bldg_name or "NA" %}
+    {% set filename=building.attr.filename or "NA" %}
+    {% set bldg_type=building.attr.bldg_type or "NA" %}
+    {% set bldg_size=building.attr.bldg_size or "NA" %}
+    {% set filesize=building.attr.filesize or "NA" %}
+    {% set bldg_vintage=building.attr.bldg_vintage or "NA" %}
+    {% set filetype=building.attr.filetype or "NA" %}
+    {% set bldg_zip=building.attr.bldg_zip or "NA" %}
+    {% set occ_count=building.attr.occ_count or "NA" %}
+    {% set hvac_type=building.attr.hvac_type or "NA" %}
+
+    {% set best_station=building.attr.bestWBAN or ['NA',0.0,'NA','NA','NA','NA','NA','NA','NA','NA'] %}
+    {% set station_name=best_station[9] or "NA" %}
+    {% set station_dist="%0.1f"|format(best_station[1]) or "NA" %}
+
+    {% set upload_date=building.attr.upload_time or None %}
+    {% if upload_date %}
+      {% set upload_time=upload_date.strftime('%m-%d-%Y %I:%M %p') %}
+    {% else %}
+      {% set upload_time='NA' %}
+    {% endif %}
+
+    {% set days=building.days or None %}
+    {% if days %}
+      {% set first_time=days[0].strftime('%m-%d-%Y %I:%M %p') %}
+      {% set last_time=days[-1].strftime('%m-%d-%Y %I:%M %p') %}
+    {% else %}
+      {% set first_time='NA' %}
+      {% set last_time='NA' %}
+    {% endif %}
+
+    <div style='margin-left:auto;margin-right:auto;width:95%;'>
+    <h1>Building fingerprinting report for '{{bldg_name}}'</h1>
+    <table>
+    <tr>
+      <td style='width:130px;font-weight:bold;vertical-align:bottom;'>File name:</td>
+      <td style='width:260px;vertical-align:bottom;'>{{filename}}</td>
+      <td style='width:150px;font-weight:bold;vertical-align:bottom;'>Building type:</td>
+      <td style='width:520px;vertical-align:bottom;'>{{bldg_type}}</td>
+    </tr>
+    <tr>
+      <td style='width:130px;font-weight:bold;'>Upload time:</td>
+      <td style='width:260px;'>{{upload_time}}</td>
+      <td style='width:150px;font-weight:bold;'>Floor area:</td>
+      <td style='width:520px;'>{{bldg_size}} sqft ({{ occ_count }} occupants)</td>
+    </tr>
+    <tr>
+      <td style='width:130px;font-weight:bold;'>Size:</td>
+      <td style='width:260px;'>{{filesize}} bytes</td>
+      <td style='width:150px;font-weight:bold;'>Year built:</td>
+      <td style='width:520px;'>{{bldg_vintage}}</td>
+    </tr>
+    <tr>
+      <td style='width:145px;font-weight:bold;'>Content type:</td>
+      <td style='width:260px;'>{{filetype}}</td>
+      <td style='width:150px;font-weight:bold;'>Zip code:</td>
+      <td style='width:520px;'>{{bldg_zip}}</td>
+    </tr>
+    <tr>
+      <td style='width:130px;font-weight:bold;'>First reading:</td>
+      <td style='width:260px;'>{{first_time}}</td>
+      <td style='width:150px;font-weight:bold;'>Heating/cooling:</td>
+      <td style='width:520px;'>{{hvac_type}}</td>
+	</tr>
+    <tr>
+      <td style='width:130px;font-weight:bold;'>Last reading:</td>
+      <td style='width:260px;'>{{last_time}}</td>
+      <td style='width:150px;font-weight:bold;'>Weather station:</td>
+      <td style='width:520px;'>{{station_name}} ({{ station_dist }} km away)</td>
+    </tr>
+    </table>
+</div>
+
+<div class='hr_rpt'">&nbsp;</div>
+<div align='center' style='margin:auto;width:90%'>
+	<table id='scoring'>
+		<tr>
+			<th>Metric</td>
+			<th>Value</td>
+			<th>Per sqft</td>
+			<th>Per occupant</td>
+		</tr>
+		<tr>
+			<td><span style='font-weight:bold;'>Average daily min (W)</span>: <span style='font-size:12px;'>This is the amount of power that the building typically uses at the lowest consumption time of day. Minimum usage is mostly driven by loads that run all the time, like refrigerators, ventilation, hallway lighting, and computers and other "vampire loads" from appliances and electronics that stay plugged in.</span></td>
+			<td>{{ '%0.0f' | format(building.stats.min) }}</td>
+			<td>{{ '%0.2f' | format(building.stats.min/building.sqft) }}</td>
+			<td>{{ '%0.0f' | format(building.stats.min/building.occupancy) }}</td>
+		</tr>
+		<tr>
+			<td><span style='font-weight:bold;'>Average daily max (W)</span>: <span style='font-size:12px;'>This is the amount of power that the building typically uses at the highest consumption time of day.  The daily maximum could be dominated by a single large load, or could be the sum of several little ones, such as AC, TV, and various appliances.</span></td>
+			<td>{{ '%0.0f' | format(building.stats.max) }}</td>
+			<td>{{ '%0.2f' | format(building.stats.max/building.sqft) }}</td>
+			<td>{{ '%0.0f' | format(building.stats.max/building.occupancy) }}</td>
+		</tr>
+		<tr>
+			<td><span style='font-weight:bold;'>Average daily range (W)</span>: <span style='font-size:12px;'>This is the difference between the average daily max and average daily min. It provides a rough estimate of the total load turned on and off every day.</span></td>
+			<td>{{ '%0.0f' | format(building.stats.range) }}</td>
+			<td>{{ '%0.2f' | format(building.stats.range/building.sqft) }}</td>
+			<td>{{ '%0.0f' | format(building.stats.range/building.occupancy) }}</td>
+		</tr>
+		<tr>
+			<td><span style='font-weight:bold;'>Average daily max/min ratio</span>: <span style='font-size:12px;'>Low values indicate that a greater proportion of items are being left on continuously. Values over 3 indicate significant loads are shut off for parts of the day. While this may indicate good control, it could also indicate excessive peak usage. To save energy, look to extend and deepen shutoff periods while also reducing peak usage.</span></td>
+			<td>{{ '%0.1f' | format(building.stats.mxmn) }}</td>
+			<td>NA</td>
+			<td>NA</td>
+		</tr>
+		<tr>
+			<td><span style='font-weight:bold;'>Annual consumption (kWh)</span>: <span style='font-size:12px;'>This is the annual electricity demand based on your data (projected if necessary). Annual kWh and annual kWh per sqft (also known as Energy Use Intensity) values are calculated nationally for <a href='http://www.eia.gov/consumption/residential/data/2009/c&e/fuel-totals/xls/CE2.1%20Site%20Fuel%20Consumption.xlsx'>residential</a> and <a href='http://www.eia.gov/consumption/commercial/data/2003/pdf/c15a.pdf'>commercial</a> buildings.</span></td>
+			<td>{{ '%0.0f' | format(building.stats.mean * 365.25 * 24 / 1000) }}</td>
+			<td>{{ '%0.2f' | format(building.stats.mean/building.sqft * 365.25 * 24 / 1000) }}</td>
+			<td>{{ '%0.0f' | format(building.stats.mean/building.occupancy * 365.25 * 24 / 1000) }}</td>
+		</tr>
+
+
+	</table>
+</div>
+<div class='space_10'>&nbsp;<div>
+<div align='center'><img width="660" height="330" src='load_shape.png' />
+</div>
+<div class='hr_rpt'">&nbsp;</div>
+<div style='font-style:italic;font-weight:bold;'>How to read this chart</div>
+<div style='font-style:italic;'>
+<span style='font-weight:bold;'>Average day</span> is computed by averaging all the readings available for each time of day,&nbsp;<span style='font-weight:bold;'> Max day </span>is the single day when you use the most energy, and&nbsp;<span style='font-weight:bold;'>Min day </span> is the single day when you use the least energy.</div>
+<div class="page_breaker">&nbsp;</div>
+   
+    {{ self.page_header() }}
+    
+    
+    <div style='float:left;text-align:left;width:350px;color:#555555;font-size:25px;line-height:110%;'>Typical Weekly Profile</div><div class='right_title'>This chart shows the power demand profile for a typical week.</div>
+    <div style='clear:both;'></div>
+    <div class='space_10'>&nbsp;<div>
+    <div align='center'><img height="480" width="640" src='weekly_mean.png' /></div>
+    <div class='hr_rpt'">&nbsp;</div>
+    <div style='font-style:italic;font-weight:bold;'>How to read this chart</div>
+	<div style='font-style:italic;'>
+    This chart displays the typical weekly profile of power intensity (in kW) over the time period of analysis. Power demand is shown on the vertical axis, and hours of the week are shown on the horizontal axis.<br/><span style='font-weight:bold'>Average kW </span>is the average of all power readings calculated separately for each hour of the week,&nbsp;<span style='font-weight:bold'> Max kW </span>is the maximum power reading calculated separately for each hour of the week, and&nbsp;<span style='font-weight:bold'>Min kW </span>is the minimum power reading calculated separately for each hour of the week.
+</div>
+    <div class='space_10'>&nbsp;<div>
+    <div class='annotation'>
+    <canvas id="weekly_canvas" style='position:absolute; top:0; left:0; z-index:0' width="800" height="400"></canvas>
+      <div align='center'><img src='{{webRoot}}static/sample_load_shape.png' /></div>
+      <div class='text' style='top:35px;left:60px;'><p>The weekly profile corresponds to the building's occupancy and use for each day of a typical week.</p>
+	  <p>The slope of the ramp up and down each morning and evening reflects how quickly the building systems are turned on and off each day.</p>
+	  <p>Instances where the load profile does not match the expected building operations may present opportunities for savings.</p>
+</div>
+      <div class='text' style='top:278px; left:310px; width:350;'>The daily curves' width should correspond to the building's occupancy schedule.</div>
+      <div class='text' style='top:100px; left:650px; text-align:left;'>Loads should reduce during lower occupancy periods (e.g. overnight, weekends, or lunch breaks).</div>
+      <div class='text' style='top:230px; left:620px; text-align:left;'>Minimums should occur overnight or during unoccupied hours and be as low as possible.</div>
+    </div>
+    <script type="text/javascript">
+      drawLine('weekly_canvas',610,240,487,195); // minimums should be near zero...
+      drawLine('weekly_canvas',420,275,405,170); // does the width...
+      
+	  drawLine('weekly_canvas',420,275,433,170); // does the width...
+      drawLine('weekly_canvas',640,110,530,180); // do loads reduce...
+    </script>
+    
+    <div class="page_breaker">&nbsp;</div>
+    <div class='space_20'>&nbsp;<div>
+    {{ self.page_header() }}
+
+    <div style='float:left;text-align:left;color:#555555;font-size:25px;'>Power Heat Map</div><div class='right_title'>This chart color codes the energy consumption for every meter reading.</div>
+    <div style='clear:both;'></div>
+    <div class='space_20'>&nbsp;<div>
+    <div align='center'><img height="480" width="800" src='heatmap.png' /></div>
+    <div class='hr_rpt'">&nbsp;</div>
+    <div style='font-style:italic;font-weight:bold;'>How to read this chart</div>
+    <div style='font-style:italic;'>This chart color codes the power demand of every meter reading provided. Each row is a full day, with dates running from top to bottom of the vertical axis. On the the horizontal axis, each column corresponds to an hour from midnight to midnight. This creates a grid of pixels, one for every reading provided. The pixels are colored to indicate the power demand (in kW) during each time, with lower energy consumption shown in blues and higher energy consumption in reds.</div>
+    <div class='space_10'><div>
+    <div class='annotation'>
+      <canvas id="heat_canvas" style='position:absolute; top:0; left:0; z-index:0' width="800" height="400"></canvas>
+      <div align='center'><img src='{{webRoot}}static/sample_heatmap.png' /></div>
+      <div class='text' style='top:40px; left:20px;'>Horizontal banding indicates changes in consumption across days. For example, small horizontal bands indicate shutoff during consecutive days (e.g. weekends), while wider bands indicate seasonal changes in energy use.</div>
+      <div class='text' style='top:190px; left:20px;'>Lack of vertical or horizontal banding indicates poor night or weekend shutoff (respectively)</div>
+      <div class='text' style='top:310px; left:320px; width:350px;'>Vertical banding shows similar timing of consumption across many days. Stronger bands indicate consistent daily scheduling of usage.</div>
+      <div class='text' style='top:140px; left:700px; text-align:left;'>Unusual or unexplainable "hot spots" may indicate poor equipment control</div>
+    </div>
+    <script type="text/javascript">
+      drawLine('heat_canvas',235,55,410,45);   // horiz. banding
+	  drawLine('heat_canvas',235,105,340,225); // horiz. banding
+      drawLine('heat_canvas',450,308,390,250); // vert banding
+      drawLine('heat_canvas',450,308,550,250); // vert banding
+      drawLine('heat_canvas',690,160,500,160); // unusual hot spot
+    </script>
+    
+    <div class="page_breaker">&nbsp;</div>
+    <div class='space_20'>&nbsp;<div>
+    {{ self.page_header() }}
+   
+    <div style='float:left;text-align:left;color:#555555;font-size:25px;'>Daily Mean & Extremes</div><div class='right_title'>This chart shows the seasonal variations in daily mean, maximum and minimum.</div>
+    <div style='clear:both;'></div>
+    <div class='space_20'>&nbsp;<div>
+    <div align='center'><img height="480" width="640" src='daily_max_min.png' /></div>
+
+    <div class='hr_rpt'">&nbsp;</div>
+    <div style='font-style:italic;font-weight:bold;'>How to read this chart</div>
+    <div style='font-style:italic;'>This chart displays the mean daily consumption (back line) and maximum (red) and minimum (blue) consumption for each day. Long term trends and seasonal patterns in usage should be visible here. Weekly patterns can also appear as repeating humps.</div>
+    <div class='annotation'>
+    <canvas id="maxmin_canvas" style='position:absolute; top:0; left:0; z-index:0' width="800" height="400"></canvas>
+      <div align='center'><img width="440" src='{{webRoot}}static/sample_max_min.png' /></div>
+      <div class='text' style='top:90px; left:60px;'>Means and maxima should be consistent with seasonal variations in weather and use.</div>
+      <div class='text' style='top:320px; left:260px; width:380px;'>Unusual changes in minimum may indicate over night usage of equipment, like air conditioning. Trend in minimum may reflect new equipment or overnight scheduling.</div>
+      <div class='text' style='top:90px; left:700px; text-align:left;'>Weekday and weekend means and maxima should be consistent with occupancy and use.</div>
+    </div>
+    <script type="text/javascript">
+      drawLine('maxmin_canvas',410,315,450,250);   // unusual changes in min...
+	  //drawLine('maxmin_canvas',235,60,490,95);   // inter season trend
+	  //drawLine('maxmin_canvas',235,60,350,135);  // inter season trend
+	  //drawLine('maxmin_canvas',690,120,570,130); // intra-season variation
+	</script>
+    
+    <div class="page_breaker">&nbsp;</div>
+    <div class='space_20'>&nbsp;<div>
+    {{ self.page_header() }}
+    
+    <div style='float:left;text-align:left;color:#555555;font-size:25px;'>Thermal Response</div><div class='right_title'>Analyze the relationship of power intensity to outdoor temperature.</div>
+    <div style='clear:both;'></div>
+    <div class='space_20'>&nbsp;<div>
+    <div align='center'><img height="480" width="640" src='tout_vs_kwh.png' /></div>
+    <div style='margin-top:50px;'></div>
+    <div class='hr_rpt'">&nbsp;</div>
+    <div style='font-style:italic;font-weight:bold;'>How to read this chart</div>
+    <div style='font-style:italic;'>This chart plots the daily energy use on its vertical axis against daily average temperature on the horizontal axis, with one point for each day in the time period of analysis.</div>
+    <div class='space_20'>&nbsp;<div>
+    <div class='annotation'>
+    <canvas id="tout_canvas" style='position:absolute; top:0; left:0; z-index:0' width="800" height="300"></canvas>
+      <div align='center'><img width="360" src='{{webRoot}}static/sample_scatter.png' /></div>
+      <div class='text' style='top:25px; left:20px;'><p>The cooling "balance point" temperature is the outdoor temperature at which energy use starts increasing with higher temperatures.</p>
+	  <p>The heating "balance point" temperature is the outdoor temperature at which energy use starts increasing with lower temperatures.</p>
+	  </div>
+      <div class='text' style='top:285px; left:270px; width:350px;'>Buildings whose readings lack a pattern in this plot likely do not have electric heating or cooling.</div>
+      <div class='text' style='top:25px; left:700px; text-align:left;'><p>Insulation, efficient windows, weather sealing, and thermostat settings can increase the cooling balance point and lower the heating balance point.</p>
+	  <p>The slope, or rate of increase, beyond the balance point(s) is determined by the combination of how well sealed and insulated your building is and the efficiency of the heating and cooling equipment used.</p>
+	  </div>
+    <script type="text/javascript">
+      drawLine('tout_canvas',235,85,470,140);    // change point
+	  //drawLine('tout_canvas',690,110,520,120); // slope
+	</script>
+  </div>
+    
+  </body>
+</html>

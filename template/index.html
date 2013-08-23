@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}: Home{% endblock %}
+{% block head %}{{ super() }}{% endblock %} {# note that the head looks for the title variable. #}
+{% block content %}    
+    <div class='content'>
+      <h1>Welcome to the building fingerprinting tool.</h1>
+      <div class='space_20'></div>
+	  This tools provides a quick and easy way to get deeper insight into your energy use. Within about 10 minutes, you can upload hourly interval Green Button electricity data and get a personalized report with illustrations of patterns in your energy use designed to help uncover potential savings.
+      <div class='space_20'></div>
+	  In households and businesses across America, correctable problems in equipment and controls lead to wasted energy and increased bills. Until the deployment of smart meters, the data needed to diagnose these problems was out of reach of most utility customers. Now that such data is accessible to millions of utility customers, the US DOE and Lawrence Berkeley National Lab have developed this web-based tool to help people better understand the patterns in their electrical data. It is anonymous and free to use for millions of utility customers who already have smart meters. It is intended for use directly by non-technical residential and business customers and as a teaching and communication aid for efficiency professionals. The algorithms and visualizations used have been released under an open source software license for experts to evaluate, adopt, or modify. 
+      <div class='space_20'></div>
+      <ul>
+      <li>To get started, <a href='/gbdata'>Download</a> your smart meter data from your utility.</li>
+      <li>Then, <a href='/upload'>Upload</a> your smart meter data here to generate your customized energy report.</li>
+      </ul>
+      <a href='/upload' class='button orange' type="submit">OK, I've got my data</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='/gbdata' class='button gray' type="submit">Help me get my data</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='/feedback' class='button gray' type="submit">Leave feedback</a>
+    </div>
+{% endblock content %}
+

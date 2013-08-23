@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://naesb.org/espi espi.xsd">
+  <id>urn:uuid:5762c9e8-4e65-3b0c-83b3-7874683f3dbe</id>
+  <link href="/v1/espi_third_party_batch_feed" rel="self">
+  </link>
+  <title type="text">Opower ESPI Third Party Batch Feed v1</title>
+  <updated>2012-11-19T00:02:12.688Z</updated>
+  <entry>
+    <id>urn:uuid:561989e6-53eb-3a84-88bd-5aa04f699c18</id>
+    <link href="/v1/User/4264204/UsagePoint/4173646" rel="self">
+    </link>
+    <link href="/v1/User/4264204/UsagePoint/4173646/MeterReading/1" rel="related">
+    </link>
+    <title type="text">OAKLAND CA 94611</title>
+    <updated>2012-11-19T00:02:12.688Z</updated>
+    <published>2011-11-30T12:00:00.000Z</published>
+    <content type="xml">
+      <UsagePoint xmlns="http://naesb.org/espi">
+        <ServiceCategory>
+          <kind>1</kind>
+        </ServiceCategory>
+      </UsagePoint>
+    </content>
+  </entry>
+  <entry>
+    <id>urn:uuid:99e0b06c-c6d3-319f-b169-77d300d33b73</id>
+    <link href="/v1/User/4264204/UsagePoint/4173646/MeterReading/1" rel="self">
+    </link>
+    <link href="/v1/ReadingType/1" rel="related">
+    </link>
+    <link href="/v1/User/4264204/UsagePoint/4173646/MeterReading/1/IntervalBlock/1" rel="related">
+    </link>
+    <updated>2012-11-19T00:02:12.688Z</updated>
+    <published>2011-11-30T12:00:00.000Z</published>
+    <content type="xml">
+      <MeterReading xmlns="http://naesb.org/espi">
+      </MeterReading>
+    </content>
+  </entry>
+  <entry>
+    <id>urn:uuid:4e1226d5-5172-3fdf-adf6-4001aee94849</id>
+    <link href="/v1/ReadingType/1" rel="self">
+    </link>
+    <updated>2012-11-19T00:02:12.688Z</updated>
+    <published>2011-11-30T12:00:00.000Z</published>
+    <content type="xml">
+      <ReadingType xmlns="http://naesb.org/espi">
+        <currency>840</currency>
+        <powerOfTenMultiplier>-3</powerOfTenMultiplier>
+        <uom>169</uom>
+      </ReadingType>
+    </content>
+  </entry>
+  <entry>
+    <id>urn:uuid:c118ef6d-73a3-3058-901d-3586f5730bef</id>
+    <link href="/v1/User/4264204/UsagePoint/4173646/MeterReading/1/IntervalBlock/1" rel="self">
+    </link>
+    <content type="xml">
+      <IntervalBlock xmlns="http://naesb.org/espi">
+        <interval>
+          <duration>34390800</duration>
+          <start>1318921200</start>
+        </interval>
+        <IntervalReading>
+          <cost>3993000</cost>
+          <timePeriod>
+            <duration>2595600</duration>
+            <start>1318921200</start>
+          </timePeriod>
+          <value>33000</value>
+        </IntervalReading>
+        <IntervalReading>
+          <cost>5906000</cost>
+          <timePeriod>
+            <duration>2505600</duration>
+            <start>1321516800</start>
+          </timePeriod>
+          <value>53000</value>
+        </IntervalReading>
+        <IntervalReading>
+          <cost>9138000</cost>
+          <timePeriod>
+            <duration>2851200</duration>
+            <start>1324022400</start>
+          </timePeriod>
+          <value>77000</value>
+        </IntervalReading>
+        <IntervalReading>
+          <cost>2615000</cost>
+          <timePeriod>
+            <duration>2505600</duration>
+            <start>1326873600</start>
+          </timePeriod>
+          <value>49000</value>
+        </IntervalReading>
+        <IntervalReading>
+          <cost>5116000</cost>
+          <timePeriod>
+            <duration>2588400</duration>
+            <start>1329379200</start>
+          </timePeriod>
+          <value>47000</value>
+        </IntervalReading>
+        <IntervalReading>
+          <cost>6143000</cost>
+          <timePeriod>
+            <duration>2764800</duration>
+            <start>1331967600</start>
+          </timePeriod>
+          <value>54000</value>
+        </IntervalReading>
+        <IntervalReading>
+          <cost>4047000</cost>
+          <timePeriod>
+            <duration>2592000</duration>
+            <start>1334732400</start>
+          </timePeriod>
+          <value>34000</value>
+        </IntervalReading>
+        <IntervalReading>
+          <cost>2873000</cost>
+          <timePeriod>
+            <duration>2505600</duration>
+            <start>1337324400</start>
+          </timePeriod>
+          <value>24000</value>
+        </IntervalReading>
+        <IntervalReading>
+          <cost>3165000</cost>
+          <timePeriod>
+            <duration>2764800</duration>
+            <start>1339830000</start>
+          </timePeriod>
+          <value>25000</value>
+        </IntervalReading>
+        <IntervalReading>
+          <cost>2947000</cost>
+          <timePeriod>
+            <duration>2505600</duration>
+            <start>1342594800</start>
+          </timePeriod>
+          <value>23000</value>
+        </IntervalReading>
+        <IntervalReading>
+          <cost>3001000</cost>
+          <timePeriod>
+            <duration>2592000</duration>
+            <start>1345100400</start>
+          </timePeriod>
+          <value>24000</value>
+        </IntervalReading>
+        <IntervalReading>
+          <cost>3445000</cost>
+          <timePeriod>
+            <duration>2678400</duration>
+            <start>1347692400</start>
+          </timePeriod>
+          <value>28000</value>
+        </IntervalReading>
+        <IntervalReading>
+          <cost>4518000</cost>
+          <timePeriod>
+            <duration>2595600</duration>
+            <start>1350370800</start>
+          </timePeriod>
+          <value>37000</value>
+        </IntervalReading>
+      </IntervalBlock>
+    </content>
+  </entry>
+</feed>

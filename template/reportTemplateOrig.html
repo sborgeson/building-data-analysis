@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Building fingerprinting report</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/static/css/base.css"        />
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/static/css/fingerprint.css" />
+  </head>
+  <body>
+    <div style='color:#008000;float:left;font-weight:bold;font-size:35px;'>Building Energy Fingerprint<br>
+    <span style='color:#008000;float:left;font-style:italic;font-size:25px;'>Green Button data analysis</span></div>
+    <span style='float:right;'><img src='http://localhost:8080/static/DOE_logo.png' />&nbsp;&nbsp;&nbsp;<img src='http://localhost:8080/static/LBNL_logo.png' /></span>
+    <div style='clear:both;'></div>
+    <div style="margin-left:auto;margin-right:auto;height:2px;border:0;color:#008000;background-color:#008000;width:100%;margin-top:45px;margin-bottom:5px;"></div>
+    <h1>Building fingerprinting report for '{{bldg_name}}'.</h1>
+    <h3>Upload File Details:</h3>
+    <span style='font-weight:bold;'>Name:</span> {{filename}}<br/>
+    <span style='font-weight:bold;'>Size:</span> {{filesize}}<br/>
+    <span style='font-weight:bold;'>Content type:</span> {{filetype}}<br/>
+    <span style='font-weight:bold;'>Building type:</span> {{bldg_type}}<br/>
+    <span style='font-weight:bold;'>Zip Code:</span> {{bldg_zip}}<br/>
+    <span style='font-weight:bold;'>Floor area:</span> {{bldg_size}}<br/>
+    <div class="hr">&nbsp;</div>
+    <div class="page_breaker">&nbsp;</div>
+    <div style='float:left;text-align:left;color:#555555;font-size:25px;'>Power Density Map</div><div style='float:right;text-align:right;color:#555555;font-style:italic;font-size:18px;width:350px;'>Analyze the extent of your daily, weekly, and seasonal shut off.</div>
+    <div style='clear:both;'></div>
+    <div align='center'><img src='http://localhost:8080/img/heatmap?sId={{sId}}' /></div>
+    <div style="margin-left:auto;margin-right:auto;height:2px;border:0;color:#008000;background-color:#008000;width:100%;margin-top:5px;margin-bottom:15px;"></div>
+    <div style='font-style:italic;font-weight:bold;'>How to read this chart</div>
+    <div style='font-style:italic;'>This chart displays the power density across each day over the whole time period. On the vertical axis, each day is a row. The horizontal axis is the time of day from midnight to midnight. The color scale indicates power density in W/sf.</div>
+    <div align='center'><img src='http://localhost:8080/static/sample_heatmap.png' /></div>
+
+
+    <div style='color:#008000;float:left;font-weight:bold;font-size:35px;margin-top:55px;'>Building Energy Fingerprint<br>
+    <span style='color:#008000;float:left;font-style:italic;font-size:25px;'>Green Button data analysis</span></div>
+    <span style='float:right;margin-top:55px;'><img src='http://localhost:8080/static/DOE_logo.png' />&nbsp;&nbsp;&nbsp;<img src='http://localhost:8080/static/LBNL_logo.png' /></span>
+    <div style='clear:both;'></div>
+    <div style="margin-left:auto;margin-right:auto;height:2px;border:0;color:#008000;background-color:#008000;width:100%;margin-top:45px;margin-bottom:5px;"></div>
+    
+    <div style='float:left;text-align:left;color:#555555;font-size:25px;'>Daily Mean & Extremes</div><div style='float:right;text-align:right;color:#555555;font-style:italic;font-size:18px;width:350px;'>Analyze seasonal variations in daily mean, maximum and minimum.</div>
+    <div style='clear:both;'></div>
+    <div style='margin-top:50px;'></div>
+    <div align='center'><img src='http://localhost:8080/img/dailyMaxMin?sId={{sId}}' /></div>
+    <div style='margin-top:50px;'></div>
+    <div style="margin-left:auto;margin-right:auto;height:2px;border:0;color:#008000;background-color:#008000;width:100%;margin-top:5px;margin-bottom:15px;"></div>
+    <div style='font-style:italic;font-weight:bold;'>How to read this chart</div>
+    <div style='font-style:italic;'>This chart displays the daily mean (back line) and range (grey area) of power intensity (W/sf) over the time period of analysis.</div>
+    <div style='margin-top:100px;'></div>
+    <div align='center'><img src='http://localhost:8080/static/sample_max_min.png' /></div>
+    <div style='margin-top:150px;'></div>
+
+
+    <div style='color:#008000;float:left;font-weight:bold;font-size:35px;margin-top:55px;'>Building Energy Fingerprint<br>
+    <span style='color:#008000;float:left;font-style:italic;font-size:25px;'>Green Button data analysis</span></div>
+    <span style='float:right;margin-top:55px;'><img src='http://localhost:8080/static/DOE_logo.png' />&nbsp;&nbsp;&nbsp;<img src='http://localhost:8080/static/LBNL_logo.png' /></span>
+    <div style='clear:both;'></div>
+    <div style="margin-left:auto;margin-right:auto;height:2px;border:0;color:#008000;background-color:#008000;width:100%;margin-top:45px;margin-bottom:5px;"></div>
+    <div style='float:left;text-align:left;width:350px;color:#555555;font-size:25px;'>Typical Weekly Profile for Occupancy-driven loads</div><div style='float:right;text-align:right;color:#555555;font-style:italic;font-size:18px;width:350px;'>Does this weekly profile reflect occupancy and use?</div>
+    <div style='clear:both;'></div>
+    <div style='margin-top:50px;'></div>
+    <div align='center'><img src='http://localhost:8080/img/meanWeek?sId={{sId}}' /></div>
+    <div style='margin-top:50px;'></div>
+    <div style="margin-left:auto;margin-right:auto;height:2px;border:0;color:#008000;background-color:#008000;width:100%;margin-top:5px;margin-bottom:15px;"></div>
+    <div style='font-style:italic;font-weight:bold;'>How to read this chart</div>
+    <div style='font-style:italic;'>This chart displays the typical weekly profile of power intensity (W/sf) over the time period of analysis, pertaining to occupancy and use and excluding the effects of weather and base loads.</div>
+    <div style='margin-top:100px;'></div>
+    <div align='center'><img src='http://localhost:8080/static/sample_load_shape.png' /></div>
+    <div style='margin-top:50px;'></div>
+
+
+    <div style='color:#008000;float:left;font-weight:bold;font-size:35px;margin-top:55px;'>Building Energy Fingerprint<br>
+    <span style='color:#008000;float:left;font-style:italic;font-size:25px;'>Green Button data analysis</span></div>
+    <span style='float:right;margin-top:55px;'><img src='http://localhost:8080/static/DOE_logo.png' />&nbsp;&nbsp;&nbsp;<img src='http://localhost:8080/static/LBNL_logo.png' /></span>
+    <div style='clear:both;'></div>
+    <div style="margin-left:auto;margin-right:auto;height:2px;border:0;color:#008000;background-color:#008000;width:100%;margin-top:45px;margin-bottom:5px;"></div>
+    <div style='float:left;text-align:left;color:#555555;font-size:25px;'>Thermal Response</div><div style='float:right;text-align:right;color:#555555;font-style:italic;font-size:18px;width:350px;'>Analyze the relationship of power intensity to outdoor temperature</div>
+    <div style='clear:both;'></div>
+    <div style='margin-top:100px;'></div>
+    <div align='center'><img src='http://localhost:8080/img/dailyToutKWh?sId={{sId}}' /></div>
+    <div style='margin-top:50px;'></div>
+    <div style="margin-left:auto;margin-right:auto;height:2px;border:0;color:#008000;background-color:#008000;width:100%;margin-top:5px;margin-bottom:15px;"></div>
+    <div style='font-style:italic;font-weight:bold;'>How to read this chart</div>
+    <div style='font-style:italic;'>This chart plots the the daily average cooling power intensity (W/sf) against daily average temperature for each day in the time period of analysis.</div>
+    <div style='margin-top:100px;'></div>
+    <div align='center'><img src='http://localhost:8080/static/sample_scatter.png' /></div>
+    
+  </body>
+</html>

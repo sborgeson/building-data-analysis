@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}: User Testing{% endblock %}
+{% block head %}{{ super() }}{% endblock %} {# note that the head looks for the title variable. #}
+{% block content %}    
+    <div class='content'>
+      <h1>User testing</h1>
+      <div class='space_20'></div>
+      <p>This tool was developed at Lawrence Berkieley National Lab with funding from the US Department of Energy to provide an open, documented, and easy to use tool for the analysis of of Smart Meter data. It is intended to support ongoing improvements in the methods and tools used to make sense of Smart Meter data, to improve building owner and occupant access to sound analytical methods, and to support better decision making about energy efficiency interventions. It is intended as a gateway to rather than a substitute for more detailed professional assessments.</p>
+	  <p>You have been selected to participate in testing the tool. Would you <span style='font-weight:bold;'>please take 10-30 minutes to use it</span> and provide valuable feedback on your experience with it? In that time, you will be asked to locate and upload your smart meter data along with some basic building information. A custom pdf report based on your data will be generated and made available for you to download and you will be asked to answer some basic questions about your experience. In return, you will quite possibly find ways to better understand your energy use and save money on your future utility bills!</p>
+	  <div class='space_20'></div>
+	  <ul>
+	  <li><span style='font-weight:bold;'>First</span> you will need to <span style='font-weight:bold;'>locate and download your own Smart Meter data</span>. We have provided general instructions for <a href='/gbdata'>getting your Green Button data</a>. However, if you have gotten stuck along the way, you can download a sample data file to use as your own. The table below provides links to sample files as well as the other information requested by the tool for a handful of examples. If you choose this route, save one of the sample files to your hard drive so you can upload it upon request.
+	  <div class='space_20'></div>
+
+	  <table border='1'>
+	  <tr>
+	  <td>File</td>
+	  <td><a href='/download?fileName=PGE_Oakland_no_AC.xml'>PGE, Oakland, no AC</a></td>
+	  <td><a href='/download?fileName=PGE_Fresno_AC.xml'>PGE, Fresno, AC</a></td>
+	  </tr>
+	  <tr>
+	  <td>Zip code</td>
+	  <td>94611</td>
+	  <td>93710</td>
+	  </tr>
+	  <tr>
+	  <td>Year built</td>
+	  <td>1920</td>
+	  <td>1950</td>
+	  </tr>
+	  <tr>
+	  <td>Floor area</td>
+	  <td>2000</td>
+	  <td>2400</td>
+	  </tr>
+	  <tr>
+	  <td>Type</td>
+	  <td>Stand alone house</td>
+	  <td>Stand alone house</td>
+	  </tr>
+	  <tr>
+	  <td>Heat and AC</td>
+	  <td>Non-electric heat / No AC</td>
+	  <td>Non-electric heat / AC</td>
+	  </tr>
+	  <tr>
+	  <td>Occupants</td>
+	  <td>4</td>
+	  <td>5</td>
+	  </tr>
+	  </table>
+	  <div class='space_20'></div>
+	  If you truly need to just cut to the chase, you can also download a <a href='/static/sample/res_report.pdf'>residential</a> or <a href='/static/sample/comm_report.pdf'>commercial</a> sample report. If you do this, please continue on to provide feedback as instructed in the fourth step.
+	  <div class='space_20'></div>
+
+	  </li>
+	  <li><span style='font-weight:bold;'>Second</span>, follow the instructions to <a href='/upload'>upload your data</a> and proceed to generate a report.
+	  <div class='space_20'></div>
+	  </li>
+	  <li><span style='font-weight:bold;'>Third, look through your report</span> with an eye towards a critique of the features or potential future directions of the underlying functionality.
+	  <div class='space_20'></div>
+	  </li>
+	  <li><span style='font-weight:bold;'>Fourth</span>, proceed to the <a href='/feedback'>user feedback screen</a> and respond to the following questions about your experience (hint: you can copy and paste them into the feedback field to get started). If you do not identify yourself, your comments will be completely anonymous.:
+	  <ol>
+	  <br /><br />
+	    <li>Identify yourself if you choose.<br/>  -</li>
+	    <li>Please provide an indication of your primary role in reviewing this tool. For example: homeowner, energy analytics provider, EE implementer, etc.<br/>  -</li>
+		<li>Please list any technical difficulties or confusion you experienced using this tool.<br/>  -</li>
+		<li>What is the most important thing you learned about your data (or the sample data)?<br/>  -</li>
+	    <li>On a scale of 1 (not at all) to 10 (very):<br />
+		  - How easy was the tool to use [&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+		  - How informative was the report [&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+		  - How well did the report communicate its information [&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+		  - How useful could the tool be to other people like you [&nbsp;&nbsp;&nbsp;&nbsp;]<br/><br/></li>
+		<li>Which types of users are most likely to benefit from this analysis? For example, homeowners, small business owners, tool developers, efficiency providers, etc.<br/>  -</li>
+		<li>How might this tool (or some permutation of it) to be useful to you or your organization?<br/>  -</li>
+		<li>Please suggest (a) improvements to the type, quality, and clarity of the information the tool provides and (b) additional features and types of analysis that you would recommend adding.<br/>  -</li>
+		<li>From start to finish, how long did it take you to generate your report?<br/>  -</li>
+		<li>How long did you spend looking at your report?<br/>  -</li>
+		<li>This tool can be freely adapted to other uses, would benefit from developer contributions, and should evolve over time to meet additional needs. If you would like to be involved in the ongoing development of this tool, please provide your contact information and a brief indication of your areas of interest and expertise.<br/>  -</li>
+		<li>Feel free to provide other comments in the space provided.<br/>  -</li>
+	  </ol>
+	  </li>
+	  </ul>
+    </div>
+{% endblock content %}
+
